@@ -35,7 +35,7 @@
         "tags": [
           "animal"
         ],
-        "summary": "Adiciona um novo animal racional",
+        "summary": "Adiciona um novo animal irracional",
         "description": "",
         "operationId": "addAnimal",
         "consumes": [

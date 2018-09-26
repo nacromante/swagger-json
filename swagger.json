@@ -1,0 +1,223 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a sample server Petstore server.  You can find out more about     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).      For this sample, you can use the api key `special-key` to test the authorization     filters.",
+    "version": "1.0.0",
+    "title": "Swagger Petstore",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "petstore.swagger.io",
+  "basePath": "/v2",
+  "tags": [
+    {
+      "name": "Animal",
+      "description": "Tudo sobre seus animais",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://swagger.io"
+      }
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/animais": {
+      "post": {
+        "tags": [
+          "animal"
+        ],
+        "summary": "Adiciona um novo animal",
+        "description": "",
+        "operationId": "addAnimal",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Animal é necessário",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Animal"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Entrada inválida"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "animal"
+        ],
+        "summary": "Atualiza um animal existente",
+        "description": "",
+        "operationId": "updateAnimal",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Animal é obrigatório",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Animal"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Id inválido"
+          },
+          "404": {
+            "description": "Animal não encontrado"
+          },
+          "405": {
+            "description": "Erro"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "animal"
+        ],
+        "summary": "Busca todos os animais",
+        "description": "Busca todos os animais na base de dados",
+        "operationId": "findPetsByStatus",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Animal"
+              }
+            }
+          },
+          "400": {
+            "description": "Erro"
+          }
+        }
+      }
+    },
+    "/animais/{animaisId}": {
+      "get": {
+        "tags": [
+          "animal"
+        ],
+        "summary": "Busca animal por id",
+        "description": "Retorna um unico animal",
+        "operationId": "getPetById",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "animaisId",
+            "in": "path",
+            "description": "Id do animal",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso",
+            "schema": {
+              "$ref": "#/definitions/Animal"
+            }
+          },
+          "400": {
+            "description": "Id inválido"
+          },
+          "404": {
+            "description": "Animal não encontrado"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "animal"
+        ],
+        "summary": "Deleta um animal",
+        "description": "",
+        "operationId": "deleteAnimal",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "api_key",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "animaisId",
+            "in": "path",
+            "description": "Id do animal para deletar",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Id inválido"
+          },
+          "404": {
+            "description": "Animal não encontrado"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Animal": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "nome": {
+          "type": "string"
+        },
+        "dataNascimento": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}
